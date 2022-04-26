@@ -5,11 +5,10 @@ function resolve(dir) {
 const webpack = require("webpack");
 module.exports = {
   devServer: {
-    // server:'http',
     proxy: {
       "/api": {
         // 要访问的跨域的api的域名
-        target: "http://ccp.cloudgd.net/api",
+        target: "http://ccp.cloudgd.net",
         changeOrigin: true,
         // ws: true,
         // changOrigin: true,

@@ -2,7 +2,7 @@
   <el-scrollbar wrap-class="scrollbar-wrapper">
     <el-menu 
     :default-active="activeMenu" 
-    :unique-opened="true" 
+    :unique-opened="false" 
     :collapse="isCollapse" 
     :background-color="theme.bg"
     :text-color="theme.color"

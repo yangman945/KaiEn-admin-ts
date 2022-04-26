@@ -10,37 +10,18 @@ import { request } from "@/api";
 import { login } from "@/api/login";
 import axios from "axios";
 onMounted(() => {
-  //  login({
-  //     username:'tester',
-  //     password:'MTIzNzg5',
-  //     method:'ps',
-  //     token_type:'user',
-  //     timestamp:'1650964211',
-  //     }).then(res => {
-  //     console.log(res,'res')
-  // }).catch(err =>{
-  //     console.log(err,'err')
-  // })
-  axios({
-      url:"//api/token/get",
-      method: 'post',
-      headers:{
-        'Content-Type': 'multipart/form-data'
-      },
-      data: {
-      username: "tester",
-      password: "MTIzNzg5",
-      method: "ps",
-      token_type: "user",
-      timestamp: "1650964211",
-    }
+  login({
+    username: 'tester',
+    password: 'MTIzNzg5',
+    method: 'ps',
+    token_type: 'user',
+    timestamp: '1650964211',
+  }).then(res => {
+    console.log(res, 'res')
+  }).catch(err => {
+    console.log(err, 'err')
   })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 });
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+</style>

@@ -1,8 +1,8 @@
 import Request from "./request";
 import type { RequestConfig } from "./types";
 export const request = new Request({
-  // baseURL: process.env.VUE_APP_APIHOST,
-  baseURL:'/api',
+  baseURL: process.env.VUE_APP_APIHOST,
+  // baseURL:'/api',
   timeout: 1000 * 60 * 5,
   interceptors: {
     // 请求拦截器

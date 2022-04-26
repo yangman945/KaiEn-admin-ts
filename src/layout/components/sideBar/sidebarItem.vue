@@ -2,22 +2,23 @@
     <div class>
         <!-- 当菜单不为null，并且没有children时 渲染 -->
         <template v-if="theOnlyOneChild && !theOnlyOneChild.children">
-            <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
-                <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
-                    <svg-icon class="svg-icon" v-if="theOnlyOneChild.meta.icon" :icon="theOnlyOneChild.meta.icon" :config="{ size: 16 }">
-                    </svg-icon>
+            <sidebar-item-link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild)">
+                <el-menu-item :index="resolvePath(theOnlyOneChild)">
+                    <svg-icon class="svg-icon" v-if="theOnlyOneChild.meta && theOnlyOneChild.meta.icon"
+                        :icon="theOnlyOneChild.meta.icon" :config="{ size: 16 }"> </svg-icon>
                     <span v-if="theOnlyOneChild.meta.title">{{ $t('route.' + theOnlyOneChild.meta.title) }}</span>
                 </el-menu-item>
             </sidebar-item-link>
         </template>
-        <el-sub-menu v-else :index="resolvePath(item.path)" popper-append-to-body>
+        <el-sub-menu v-else :index="resolvePath(item)" popper-append-to-body>
             <template #title>
-                <svg-icon class="svg-icon" v-if="item.meta.icon" :icon="item.meta.icon" :config="{ size: 16 }"></svg-icon>
+                <svg-icon class="svg-icon" v-if="item.meta && item.meta.icon" :icon="item.meta.icon"
+                    :config="{ size: 16 }"></svg-icon>
                 <span v-if="item.meta && item.meta.title">{{ $t('route.' + item.meta.title) }}</span>
             </template>
             <template v-if="item.children">
                 <sidebar-item v-for="child in item.children" :key="child.path" :item="child" :is-first-level="false"
-                    :base-path="resolvePath(child.path)" :is-collapse="isCollapse" class="nest-menu" />
+                    :base-path="resolvePath(child)" :is-collapse="isCollapse" class="nest-menu" />
             </template>
         </el-sub-menu>
     </div>
@@ -75,18 +76,19 @@ const theOnlyOneChild = computed(() => {
     return { ...props.item, path: '' }
 })
 // 访问路径校验 根路径或子菜单路由若为外链 直接返回 否则拼接后返回绝对路径
-const resolvePath = (routePath: string) => {
-    if (isExternal(routePath)) {
-        return routePath
+const resolvePath = (routeConfig: RouteRecordRaw) => {
+    if (isExternal(routeConfig.path)) {
+        return routeConfig
     }
     if (isExternal(props.basePath)) {
         return props.basePath
     }
-    return path.resolve(props.basePath, routePath)
+    return path.resolve(props.basePath, routeConfig.path)
 }
+
 </script>
 <style lang="scss" scoped>
-.svg-icon{
+.svg-icon {
     margin-right: 20px;
 }
 </style>
