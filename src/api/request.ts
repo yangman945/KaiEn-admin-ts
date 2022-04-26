@@ -21,6 +21,7 @@ class Request {
   requestUrlList?: string[];
   constructor(config: RequestConfig) {
     this.instance = axios.create(config);
+    
     this.interceptorsObj = config.interceptors;
     this.requestUrlList = [];
     this.cancelRequestSourceList = [];
