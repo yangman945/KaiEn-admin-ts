@@ -1,6 +1,6 @@
 import { MutationTree } from "vuex";
 import { TagsViewState, TagView } from "./state";
-import { TagsMutationTypes } from "../../types";
+import { TagsMutationTypes } from "./types";
 export type Mutations<S = TagsViewState> = {
   [TagsMutationTypes.ADD_VISITED_VIEW](state: S, view: TagView): void;
   [TagsMutationTypes.ADD_CACHED_VIEW](state: S, view: TagView): void

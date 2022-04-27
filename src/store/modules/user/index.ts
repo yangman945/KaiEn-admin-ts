@@ -5,16 +5,15 @@ import {
   Module
 } from 'vuex'
 
-// TODO: How to surpass cyclical dependency linting errors cleanly?
 import { RootState } from '@/store'
 import { state } from './state'
 import { mutations, Mutations } from './mutations'
 import { actions, Actions } from './actions'
-import type { AppState } from './state'
+import type { UserState } from './state'
 
-export { AppState }
+export { UserState }
 
-export type AppStore<S = AppState> = Omit<
+export type UserStore<S = UserState> = Omit<
   VuexStore<S>,
   'getters' | 'commit' | 'dispatch'
 > & {
@@ -30,8 +29,8 @@ export type AppStore<S = AppState> = Omit<
     options?: DispatchOptions
   ): ReturnType<Actions[K]>
 }
-export const store: Module<AppState, RootState> = {
+export const store: Module<UserState, RootState> = {
   state,
   mutations,
-  actions
+  actions,
 }

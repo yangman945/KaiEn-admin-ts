@@ -23,3 +23,7 @@ export const removeToken = () => Cookies.remove(Keys.tokenKey)
 export const getRefreshToken = () => Cookies.get(Keys.refreshTokenKey)
 export const setRefreshToken = (token: string) => Cookies.set(Keys.refreshTokenKey, token)
 export const removeRefreshToken = () => Cookies.remove(Keys.refreshTokenKey)
+
+export const getSysConfig = () => Cookies.get(Keys.sysConfigKey)
+export const setSysConfig = (list: Array<number>) => Cookies.set(Keys.sysConfigKey, list)
+export const removeSysConfig = () => Cookies.remove(Keys.sysConfigKey)

@@ -1,27 +1,23 @@
 <template>
   <div class="login-wrapper">
-    登录页
-    <el-button @click="request.cancelRequest('/login')">取消请求</el-button>
-  </div>
+    <el-button @click="handleLogin">登录</el-button>
+   </div>  
 </template>
 <script lang="ts" setup>
-import { onMounted } from "vue";
-import { request } from "@/api";
-import { login } from "@/api/login";
-const data= {
+import { useStore } from "@/store";
+import { UserActionTypes} from '@/store/modules/user/types'
+const store = useStore()
+const loginData= {
     username: 'tester',
     password: 'MTIzNzg5',
     method: 'ps',
     token_type: 'user',
     timestamp: '1650964211',
 }
-onMounted(() => {
-  login(data).then(res => {
-    console.log(res, 'res')
-  }).catch(err => {
-    console.log(err, 'err')
-  })
-});
+
+const handleLogin = () => {
+  store.dispatch(UserActionTypes.ACTION_LOGIN,loginData)
+}
 </script>
 <style lang="scss">
 </style>

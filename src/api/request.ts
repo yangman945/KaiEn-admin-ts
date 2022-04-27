@@ -1,6 +1,9 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import type { RequestConfig, RequestInterceptors, CancelRequestSource } from "./types";
+import { getToken } from '@/utils/cookies'
+import whitelist from "./whitelist";
+const token = getToken() as string
 class Request {
   // axios 实例
   instance: AxiosInstance;
@@ -27,9 +30,12 @@ class Request {
     this.cancelRequestSourceList = [];
     //   添加请求拦截器
     this.instance.interceptors.request.use(
-      (res: AxiosRequestConfig) => {
-        console.log(res, "全局请求拦截器");
-        return res;
+      (config: AxiosRequestConfig) => {
+        if(!whitelist.includes(config.url as string) && token){
+          config.headers!.token = token
+        }
+        console.log(config, "全局请求拦截器");
+        return config;
       },
       (err: any) => err
     );

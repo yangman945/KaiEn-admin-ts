@@ -2,7 +2,7 @@ import { ActionTree, ActionContext } from 'vuex'
 import { RootState } from '@/store'
 import { TagsViewState, TagView } from './state'
 import { Mutations } from './mutations'
-import { TagsMutationTypes,TagsActionTypes } from '../../types'
+import { TagsMutationTypes,TagsActionTypes } from './types'
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
     key: K,

@@ -1,11 +1,12 @@
 class Keys {
-  static sidebarStatusKey = 'admin-sidebarStatusKey'
-  static languageKey = 'admin-languageKey'
-  static sizeKey = 'admin-sizeKey'
-  static tokenKey = 'admin-access-token'
-  static refreshTokenKey = 'admin-refresh-token'
-  static aseKey = 'admin-ase-key'
-  static themeKey = 'admin-theme-key'
+  static sidebarStatusKey = 'sys-sidebarStatus-key'
+  static languageKey = 'sys-language-key'
+  static sizeKey = 'sys-size-key'
+  static tokenKey = 'sys-accessToken-key'
+  static refreshTokenKey = 'sys-refreshToken-key'
+  static aseKey = 'sys-ase-key'
+  static themeKey = 'sys-theme-key'
+  static sysConfigKey = 'sys-config-key'
 }
 
 export default Keys

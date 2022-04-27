@@ -1,6 +1,6 @@
 import api from '../index'
 import qs from 'qs'
-export function login(data) {
+export function loginRequest(data) {
     return api({
       url: '/token/get',
       method: 'post',
