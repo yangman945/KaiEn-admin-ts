@@ -6,13 +6,13 @@ export const setTheme = (theme: string) => Cookies.set(Keys.themeKey, theme)
 // 配置侧边栏折叠状态
 export const getSidebarStatus = () => Cookies.get(Keys.sidebarStatusKey)
 export const setSidebarStatus = (sidebarStatus: string) => Cookies.set(Keys.sidebarStatusKey, sidebarStatus)
-
+// 语言配置
 export const getLanguage = () => Cookies.get(Keys.languageKey)
 export const setLanguage = (language: string) => Cookies.set(Keys.languageKey, language)
 
 export const getTime = () => Cookies.get(Keys.languageKey)
 export const setTime = (time: string) => Cookies.set(Keys.languageKey, time)
-
+// 字体大小
 export const getSize = () => Cookies.get(Keys.sizeKey)
 export const setSize = (size: string) => Cookies.set(Keys.sizeKey, size)
 

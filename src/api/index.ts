@@ -4,6 +4,10 @@ export const request = new Request({
   baseURL: process.env.VUE_APP_APIHOST,
   // baseURL:'/api',
   timeout: 1000 * 60 * 5,
+  headers:{
+    // 'content-type':'multipart/form-data'
+    'content-type':'application/x-www-form-urlencoded; charset=UTF-8'
+  },
   interceptors: {
     // 请求拦截器
     requestInterceptors: (config) => {
