@@ -41,7 +41,7 @@ export const actions: ActionTree<UserState, RootState> & Actions = {
       .then(async (res) => {
         console.log(res,"回调")
         if (res?.response_code === '0') {
-          store.dispatch(SystemActionTypes.ACTION_GET_SYS_CONFIG,undefined)
+          store.dispatch(SystemActionTypes.ACTION_GET_MENU,undefined)
           setToken(res.data.access_token);
           commit(UserMutationTypes.SET_TOKEN, res.data.access_token);
           setRefreshToken(res.data.refresh_token);

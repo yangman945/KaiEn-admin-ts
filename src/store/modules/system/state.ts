@@ -1,17 +1,17 @@
 export interface SystemState {
-  themeMenu:Array<number>,
+  theme:Array<string>,
   paths:Object,
   gvcode_login:number,
   gvcode_reg:number,
   site_name:string,
-  menu: Array<any>
+  menuList: Array<any>
 }
 
 export const state: SystemState = {
-  themeMenu:[],
+  theme:[],
   paths:{},
   site_name:'',
   gvcode_login:0,
   gvcode_reg:0,
-  menu:[] 
+  menuList:[] 
 }

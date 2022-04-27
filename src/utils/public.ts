@@ -1,34 +1,17 @@
-type Debounce = (
-  fn: Function,
-  interval?: number,
-  immediate?: boolean
-) => Function;
-export const debounce:Debounce = (fn, interval = 300, immediate = true) => {
-  let timer: number | undefined;
-  return function (this: unknown,event) {
-    clearTimeout(timer);
-    let now = immediate && !timer;
-    //   window.setTimeout 返回的是number
-    timer = window.setTimeout(() => {
-      timer = undefined;
-      !immediate ? fn.call(this, event) : null;
-    }, interval);
-    now ? fn.call(this, event) : null;
-  };
-};
-
-type Throttle = (
-    fn:Function,
-    interval?:number
-) => Function
-export const throttle:Throttle = (fn,interval=300) => {
-    let flag:boolean = true
-    return function(this: unknown){
-        if(!flag) return
-        flag = false
-        setTimeout(() =>{
-            fn.call(this,arguments)
-            flag = true
-        },interval)
+/**
+* @function isVueKey
+* @description 匹配是否为vue专属key
+* @param Object
+* @return Array<string>
+*/
+interface IsVuekey {(theme:object):Array<string>}
+export const isVueKey:IsVuekey = (theme) => {
+  const reg = /_vue$/ 
+  const menuidList:Array<string> = []
+  Array.from(Object.keys(theme)).forEach((str:string) => {
+    if(reg.test(str)){
+      menuidList.push(theme[str])
     }
+  })
+  return menuidList
 }

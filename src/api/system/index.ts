@@ -10,10 +10,10 @@ export function getSysConfigRequest() {
   });
 }
 // 获取菜单配置列表
-export function getMenuRequest() {
+export function getMenuRequest(data) {
     return api({
       url: '/sys/menu/list',
       method: 'post',
-      // data:qs.stringify(data)
+      data:qs.stringify(data)
     });
 }

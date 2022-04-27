@@ -31,12 +31,12 @@ export const actions: ActionTree<SystemState, RootState> & Actions = {
         console.log(err);
       });
   },
-  async [SystemActionTypes.ACTION_GET_MENU]({ commit }: AugmentedActionContext) {
-    await getMenuRequest()
+  async [SystemActionTypes.ACTION_GET_MENU]({ commit,state }: AugmentedActionContext) {
+    await getMenuRequest({id:state.theme})
       .then(async (res) => {
         console.log(res, "getMenuRequest");
         if (res?.response_code === "0") {
-          commit(SystemMutationTypes.SET_MENU, res.data.menu);
+          commit(SystemMutationTypes.SET_MENU, res.data.menus);
         }
       })
       .catch((err) => {
