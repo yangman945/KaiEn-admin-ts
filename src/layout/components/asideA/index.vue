@@ -165,9 +165,9 @@
 import { defineComponent, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import MainMenuConfig from "@/core/config/menusConfig";
-
+console.log(MainMenuConfig,"MainMenuConfig")
 export default defineComponent({
-  name: "kt-menu",
+  name: "asideA",
   setup() {
     const route = useRoute();
     const scrollElRef = ref<null | HTMLElement>(null);
@@ -192,6 +192,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 
-@import "base";
-// @import "menu";
+// @import "base";
+// @import "styles/scss/layout/aside/_menu.scss";
 </style>

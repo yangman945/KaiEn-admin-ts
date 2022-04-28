@@ -23,5 +23,3 @@ const handleLogin = () => {
   store.dispatch(UserActionTypes.ACTION_LOGIN,loginData)
 }
 </script>
-<style lang="scss">
-</style>
