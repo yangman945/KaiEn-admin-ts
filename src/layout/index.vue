@@ -1,7 +1,7 @@
 <template>
     <div :class="['app-wrapper', { 'hide-sidebar': isCollapse }]">
         <div class="sidebar-container">
-            <side-bar />
+            <aside />
         </div>
         <div :class="['main-container', { 'hasTagsView': true }]">
             <div class="fixed-header">
@@ -15,7 +15,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useStore } from '@/store'
-import { AppMain, SideBar, TagsView, NavBar } from './components'
+import { AppMain, Aside, TagsView, NavBar } from './components'
 const store = useStore()
 const isCollapse = computed(() => {
     return store.state.app.sidebar.opened

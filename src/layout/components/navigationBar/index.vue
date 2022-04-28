@@ -6,7 +6,7 @@
          />
         <bread-crumb class="bread-crumb" />
         <div class="options-right">
-            <theme-icon class="theme-icon" />
+            <!-- <theme-icon class="theme-icon" /> -->
             <lang-select class="lang-select" />
             <screen-full class="screen-full" />
         </div>
@@ -20,7 +20,7 @@ import breadCrumb from '@/components/bread_crumb/index.vue'
 import screenFull from '@/components/screen_full/index.vue'
 import langSelect from '@/components/lang_select/index.vue'
 import collapseBtn from '@/components/collapse_btn/index.vue'
-import themeIcon from '@/components/theme_icon/index.vue'
+// import themeIcon from '@/components/theme_icon/index.vue'
 const store = useStore()
 const isCollapse = computed(() => {
       return store.state.app.sidebar.opened

@@ -4,8 +4,6 @@
     :default-active="activeMenu" 
     :unique-opened="false" 
     :collapse="isCollapse" 
-    :background-color="theme.bg"
-    :text-color="theme.color"
     active-text-color="#409EFF"
       class="el-menu-vertical-demo">
       <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path"
@@ -15,7 +13,6 @@
 </template>
 <script lang="ts" setup>
 import { computed } from 'vue'
-import theme from '@/styles/_handle.scss'
 import { useRoute } from 'vue-router'
 import { routes } from '@/router'
 import { useStore } from '@/store'
@@ -30,7 +27,6 @@ const activeMenu = computed(() => {
   }
   return path
 })
-console.log(theme,"theme")
 const store = useStore()
 const isCollapse = computed(() => {
   return store.state.app.sidebar.opened

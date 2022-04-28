@@ -10,7 +10,4 @@ const { params} = route
 console.log(params,'params')
 </script>
 <style lang="scss" scoped>
-.custom-wrapper{
-    background-color: aqua;
-}
 </style>

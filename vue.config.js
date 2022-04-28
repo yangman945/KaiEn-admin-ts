@@ -2,6 +2,8 @@ const path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
+// 从 js 中提取css 使css成为一个独立文件
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 module.exports = {
   devServer: {
@@ -23,12 +25,21 @@ module.exports = {
     "style-resources-loader": {
       preProcessor: "scss",
       patterns: [
-        path.resolve(__dirname, "./src/styles/_theme.scss"),
-        path.resolve(__dirname, "./src/styles/_handle.scss"),
+        path.resolve(__dirname, "./src/styles/scss/style.scss"),
+        // path.resolve(__dirname, "./src/styles/_handle.scss"),
+        // path.resolve(__dirname, "./src/styles/_variables.scss"),
+        // path.resolve(__dirname, "./src/styles/mixins/_menu.scss"),
       ],
     },
   },
   chainWebpack(config) {
+    // config.module
+    //   .rule("scss")
+    //   .test(/\.scss$/)
+    //   .use(MiniCssExtractPlugin.loader, "css-loader")
+    //   .loader("sass-loader")
+    //   .options({ sourceMap: true })
+    //   .end();
     // 设置 svg-sprite-loader
     // config 为 webpack 配置对象
     // config.module 表示创建一个具名规则，以后用来修改规则
