@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 import type { RequestConfig, RequestInterceptors, CancelRequestSource } from "./types";
 import { getToken } from '@/utils/cookies'
-import whitelist from "./whitelist";
+import whiteList from "../config/default/httpWhiteList";
 const token = getToken() as string
 class Request {
   // axios 实例
@@ -31,7 +31,7 @@ class Request {
     //   添加请求拦截器
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        if(!whitelist.includes(config.url as string) && token){
+        if(!whiteList.includes(config.url as string) && token){
           config.headers!.token = token
         }
         console.log(config, "全局请求拦截器");

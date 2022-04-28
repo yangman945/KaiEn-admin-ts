@@ -1,11 +1,11 @@
 import { MutationTree } from 'vuex'
 import { SystemState } from './state'
 import { SystemMutationTypes } from './types'
-import {isVueKey} from '@/utils/public'
+import {getVueSysKey,getValidMenus} from '@/utils/public'
 
 export type Mutations<S = SystemState> = {
   [SystemMutationTypes.SET_SYS_CONFIG](state: S, config): void,
-  [SystemMutationTypes.SET_MENU](state: S, menu: Array<any>): void
+  [SystemMutationTypes.SET_MENU](state: S, menu): void
 }
 
 export const mutations: MutationTree<SystemState> & Mutations = {
@@ -14,10 +14,10 @@ export const mutations: MutationTree<SystemState> & Mutations = {
     state.gvcode_login = access.gvcode_login
     state.gvcode_reg = access.gvcode_reg
     state.site_name = site_name
-    state.theme = isVueKey(theme)
-    console.log(state.theme,"state.theme")
+    state.theme = getVueSysKey(theme)
   },
-  [SystemMutationTypes.SET_MENU](state: SystemState, menus: Array<any>) {
-    state.menuList = menus
+  [SystemMutationTypes.SET_MENU](state: SystemState, menus) {
+    state.menuList = getValidMenus(menus)
+    console.log(state.menuList,"state.menuList")
   }
 }

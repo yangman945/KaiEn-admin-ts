@@ -32,7 +32,7 @@ export const actions: ActionTree<SystemState, RootState> & Actions = {
       });
   },
   async [SystemActionTypes.ACTION_GET_MENU]({ commit,state }: AugmentedActionContext) {
-    await getMenuRequest({id:state.theme})
+    await getMenuRequest({id:(state.theme).toString()})
       .then(async (res) => {
         console.log(res, "getMenuRequest");
         if (res?.response_code === "0") {

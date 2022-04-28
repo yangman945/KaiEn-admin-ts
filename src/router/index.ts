@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw,RouteLocationNormalized } from "vue-router";
 import Layout from "@/layout/index.vue";
 import Custom from "@/views/custom/index.vue";
 

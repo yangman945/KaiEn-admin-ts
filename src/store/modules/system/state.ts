@@ -1,10 +1,23 @@
+export interface MenuItem {
+  actived:string,
+  css:string,
+  has_sub:0,
+  icon:string,
+  role:number,
+  status:number,
+  sub:Array<MenuItem>,
+  tag:string,
+  target:string,
+  title:string,
+  url:string
+}
 export interface SystemState {
   theme:Array<string>,
   paths:Object,
   gvcode_login:number,
   gvcode_reg:number,
   site_name:string,
-  menuList: Array<any>
+  menuList: Array<Array<MenuItem>>
 }
 
 export const state: SystemState = {
