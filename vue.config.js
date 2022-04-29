@@ -12,11 +12,6 @@ module.exports = {
         // 要访问的跨域的api的域名
         target: "http://ccp.cloudgd.net",
         changeOrigin: true,
-        // ws: true,
-        // changOrigin: true,
-        // pathRewrite: {
-        //   "^/api": "/api",
-        // },
       },
     },
   },
@@ -26,9 +21,7 @@ module.exports = {
       preProcessor: "scss",
       patterns: [
         path.resolve(__dirname, "./src/styles/scss/style.scss"),
-        // path.resolve(__dirname, "./src/styles/_handle.scss"),
-        // path.resolve(__dirname, "./src/styles/_variables.scss"),
-        // path.resolve(__dirname, "./src/styles/mixins/_menu.scss"),
+        path.resolve(__dirname, "./src/styles/scss/plugins.scss"),
       ],
     },
   },

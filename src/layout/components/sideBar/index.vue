@@ -1,51 +1,51 @@
 <template>
-  <el-scrollbar wrap-class="scrollbar-wrapper">
-    <el-menu 
-    :default-active="activeMenu" 
-    :unique-opened="false" 
-    :collapse="isCollapse" 
-    active-text-color="#409EFF"
-      class="el-menu-vertical-demo">
-      <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path"
-        :is-collapse="isCollapse" class="nest-menu" />
-    </el-menu>
-  </el-scrollbar>
+  <div
+    id="kt_aside"
+    class="aside aside-hoverable"
+    :class="[
+      asideTheme === 'light' && 'aside-light',
+      asideTheme === 'dark' && 'aside-dark',
+    ]"
+    data-kt-drawer="true"
+    data-kt-drawer-name="aside"
+    data-kt-drawer-activate="{default: true, lg: false}"
+    data-kt-drawer-overlay="true"
+    data-kt-drawer-width="{default:'200px', '300px': '250px'}"
+    data-kt-drawer-direction="start"
+    data-kt-drawer-toggle="#kt_aside_mobile_toggle"
+  >
+    <div class="aside-logo flex-column-auto" id="kt_aside_logo">
+      <a href="#" v-if="asideTheme === 'dark'">
+        <img alt="Logo" :src="props.darkLogo" class="h-25px logo" />
+      </a>
+      <a href="#" v-if="asideTheme === 'light'">
+        <img alt="Logo" :src="props.lightLogo" class="h-25px logo" />
+      </a>
+      <div
+        id="kt_aside_toggle"
+        class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle"
+        data-kt-toggle="true"
+        data-kt-toggle-state="active"
+        data-kt-toggle-target="body"
+        data-kt-toggle-name="aside-minimize"
+      >
+        <span class="svg-icon svg-icon-1 rotate-180">
+          <inline-svg src="media/icons/duotune/arrows/arr080.svg" />布局1
+        </span>
+      </div>
+    </div>
+    <div class="aside-menu flex-column-fluid">
+      <menu-bar></menu-bar>
+    </div>
+  </div>
 </template>
+
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { routes } from '@/router'
-import { useStore } from '@/store'
-import SidebarItem from './sidebarItem.vue'
-const route = useRoute()
-const activeMenu = computed(() => {
-  const { meta, path } = route
-  if (meta) {
-    if (meta.activeMenu) {
-      return meta.activeMenu
-    }
-  }
-  return path
-})
-const store = useStore()
-const isCollapse = computed(() => {
-  return store.state.app.sidebar.opened
-})
+import { defineProps, ref } from "vue";
+import menuBar from "./menuBar.vue";
+const asideTheme = ref("dark");
+const props = defineProps({
+  lightLogo: String,
+  darkLogo: String,
+});
 </script>
-<style lang="scss">
-.el-scrollbar__view {
-  height: 100%;
-}
-</style>
-<style lang="scss" scoped>
-.el-scrollbar {
-  height: calc(100% - 50px);
-
-}
-
-.el-menu {
-  border: none;
-  height: 100% !important;
-  width: 100% !important;
-}
-</style>

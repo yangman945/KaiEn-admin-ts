@@ -3,7 +3,7 @@ const DocMenuConfig = [
     {
       pages: [
         {
-          heading: "仪表板",
+          sectionTitle: "仪表板",
           route: "/dashboard",
           svgIcon: "media/icons/duotune/art/art002.svg",
           fontIcon: "bi-app-indicator",

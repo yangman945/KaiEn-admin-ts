@@ -35,22 +35,6 @@
                 active-class="active"
                 :to="menuItem.route"
               >
-                <span
-                  v-if="menuItem.svgIcon || menuItem.fontIcon"
-                  class="menu-icon"
-                >
-                  <!-- <i
-                    v-if="asideMenuIcons === 'font'"
-                    :class="menuItem.fontIcon"
-                    class="bi fs-3"
-                  ></i> -->
-                  <!-- <span
-                    v-else-if="asideMenuIcons === 'svg'"
-                    class="svg-icon svg-icon-2"
-                  >
-                    <inline-svg :src="menuItem.svgIcon" />
-                  </span> -->
-                </span>
                 <span class="menu-title">{{
                   menuItem.heading
                 }}</span>
@@ -66,22 +50,6 @@
             data-kt-menu-trigger="click"
           >
             <span class="menu-link">
-              <span
-                v-if="menuItem.svgIcon || menuItem.fontIcon"
-                class="menu-icon"
-              >
-                <!-- <i
-                  v-if="asideMenuIcons === 'font'"
-                  :class="menuItem.fontIcon"
-                  class="bi fs-3"
-                ></i> -->
-                <!-- <span
-                  v-else-if="asideMenuIcons === 'svg'"
-                  class="svg-icon svg-icon-2"
-                >
-                  <inline-svg :src="menuItem.svgIcon" />
-                </span> -->
-              </span>
               <span class="menu-title">{{
                 menuItem.sectionTitle
               }}</span>
@@ -167,7 +135,7 @@ import { useRoute } from "vue-router";
 import MainMenuConfig from "@/core/config/menusConfig";
 console.log(MainMenuConfig,"MainMenuConfig")
 export default defineComponent({
-  name: "asideA",
+  name: "menuBar",
   setup() {
     const route = useRoute();
     const scrollElRef = ref<null | HTMLElement>(null);
@@ -190,8 +158,7 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss" scoped>
-
-// @import "base";
-// @import "styles/scss/layout/aside/_menu.scss";
+<style lang="scss">
+// @import "src/styles/scss/layout/aside/_menu.scss";
+// @import "src/styles/scss/layout/aside/_base.scss";
 </style>
