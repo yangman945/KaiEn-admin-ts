@@ -1,5 +1,5 @@
 <template>
-  <KTLoader v-if="loaderEnabled" :logo="loaderLogo" />
+  <!-- <KTLoader v-if="loaderEnabled" :logo="loaderLogo" /> -->
   <div class="page d-flex flex-row flex-column-fluid">
     <side-bar v-if="asideEnabled" :lightLogo="themeLightLogo" :darkLogo="themeDarkLogo" />
     <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">

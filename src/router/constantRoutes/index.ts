@@ -80,5 +80,4 @@ const routes: Array<RouteRecordRaw> = [
     redirect: "/404",
   },
 ];
-
 export default routes;

@@ -17,7 +17,7 @@ const DocMenuConfig = [
       pages: [
         {
           sectionTitle: "用户资料",
-          route: "/account",
+          route: "/crafted/pages/profile",
           svgIcon: "media/icons/duotune/communication/com006.svg",
           fontIcon: "bi-person",
           sub: [
@@ -81,6 +81,5 @@ const DocMenuConfig = [
       ],
     },
   ];
-  
   export default DocMenuConfig;
   

@@ -17,7 +17,9 @@ export const mutations: MutationTree<SystemState> & Mutations = {
     state.theme = getVueSysKey(theme)
   },
   [SystemMutationTypes.SET_MENU](state: SystemState, menus) {
-    state.menuList = getValidMenus(menus)
+    const filterMenu = getValidMenus(menus)
+    state.menuList = filterMenu
+    window.localStorage.setItem('localMenu',JSON.stringify(filterMenu),)
     console.log(state.menuList,"state.menuList")
   }
 }

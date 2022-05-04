@@ -30,7 +30,7 @@
         data-kt-toggle-name="aside-minimize"
       >
         <span class="svg-icon svg-icon-1 rotate-180">
-          <inline-svg src="media/icons/duotune/arrows/arr080.svg" />布局1
+          <!-- <inline-svg src="media/icons/duotune/arrows/arr080.svg" />布局1 -->
         </span>
       </div>
     </div>
