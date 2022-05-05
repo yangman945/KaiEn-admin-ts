@@ -35,14 +35,14 @@
       </div>
     </div>
     <div class="aside-menu flex-column-fluid">
-      <menu-bar></menu-bar>
+      <sub-menu></sub-menu>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { defineProps, ref } from "vue";
-import menuBar from "./menuBar.vue";
+import SubMenu from "./subMenu.vue";
 const asideTheme = ref("dark");
 const props = defineProps({
   lightLogo: String,

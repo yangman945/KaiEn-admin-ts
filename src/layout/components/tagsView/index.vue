@@ -153,7 +153,6 @@ watch(() => currentRoute.name, () => { addTags() })
 watch(
       () => state.visible,
       (value) => {
-        console.log(value,"?????")
         if (value) {
           document.body.addEventListener('click', state.closeMenu)
         } else {

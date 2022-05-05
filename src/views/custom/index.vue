@@ -1,6 +1,6 @@
 <template>
 <div class="custom-wrapper">
-    这个是自定义路由{{params.id}}
+    自定义路由
 </div>
 </template>
 <script lang="ts" setup>

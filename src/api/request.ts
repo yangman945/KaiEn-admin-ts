@@ -32,6 +32,7 @@ class Request {
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
         if(!whiteList.includes(config.url as string) && token){
+          console.log(token,"token")
           config.headers!.token = token
         }
         console.log(config, "全局请求拦截器");

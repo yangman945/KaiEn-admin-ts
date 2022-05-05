@@ -1,4 +1,5 @@
 import { ActionTree, ActionContext } from "vuex";
+import {RouteRecordRaw} from 'vue-router'
 import { RootState } from "@/store";
 import { SystemState } from "./state";
 import { Mutations } from "./mutations";
@@ -15,6 +16,7 @@ type AugmentedActionContext = {
 export interface Actions {
   [SystemActionTypes.ACTION_GET_SYS_CONFIG]({ commit }: AugmentedActionContext): void;
   [SystemActionTypes.ACTION_GET_MENU]({ commit }: AugmentedActionContext): void;
+  [SystemActionTypes.ACTION_SET_ASYNC_ROUTES]({ commit }: AugmentedActionContext,list:Array<RouteRecordRaw>): void;
 }
 
 export const actions: ActionTree<SystemState, RootState> & Actions = {
@@ -42,5 +44,8 @@ export const actions: ActionTree<SystemState, RootState> & Actions = {
       .catch((err) => {
         console.log(err);
       });
+  },
+  [SystemActionTypes.ACTION_SET_ASYNC_ROUTES]({ commit }: AugmentedActionContext,list:Array<RouteRecordRaw>) {
+          commit(SystemMutationTypes.SET_ASYNC_ROUTES,list);
   },
 };

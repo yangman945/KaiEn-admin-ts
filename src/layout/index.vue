@@ -3,6 +3,7 @@
   <div class="page d-flex flex-row flex-column-fluid">
     <side-bar v-if="asideEnabled" :lightLogo="themeLightLogo" :darkLogo="themeDarkLogo" />
     <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
+      <header-wrapper />
       <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
         <div class="post d-flex flex-column-fluid"></div>
       </div>
@@ -12,7 +13,7 @@
 <script lang="ts" setup>
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { SideBar } from "./components/index";
+import { SideBar,HeaderWrapper } from "./components/index";
 import { MenuComponent } from "@/assets/ts/components";
 const route = useRoute()
 // 是否激活侧边栏
