@@ -11,24 +11,26 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     component: Layout,
     redirect: "/dashboard",
+    name: "Dashboard",
     meta: {
       title: "dashboard",
     },
-    children: [
-      {
-        path: "dashboard",
-        component: () =>
-          import(
-            /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
-          ),
-        name: "Dashboard",
-        meta: {
-          title: "dashboard",
-          icon: "dashboard",
-        },
+    children: [{
+      path: "/dashboard",
+      name:'Dashboards',
+      component: () =>
+        import(
+          /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
+        ),
+      meta: {
+        title: "dashboard",
+        icon: "dashboard",
       },
-      // ...constantRoutes
-    ],
+    },],
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/404",
   }
 ];
 const router = createRouter({

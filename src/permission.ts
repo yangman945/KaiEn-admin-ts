@@ -3,11 +3,12 @@ import router from "@/router";
 import { store } from "@/store";
 import {SystemActionTypes} from '@/store/modules/system/types'
 import whiteList from "@/config/default/routerWhiteList";
-import Layout from "@/layout/index.vue";
+import constantRoutes from '@/router/constantRoutes'
 import Custom from "@/views/custom/index.vue";
 const token = store.state.user.token;
 const menuList = store.state.system.menuList.flat();
-const asyncRoutes = filterAsyncRouter(menuList);
+const asyncRoutes = [...constantRoutes,...filterAsyncRouter(menuList)];
+console.log(asyncRoutes,'asyncRoutes')
 router.beforeEach(
   (to: RouteLocationNormalized, from: RouteLocationNormalized, next: any) => {
     if (token) {
@@ -26,6 +27,7 @@ router.beforeEach(
     }
   }
 );
+console.log(router.getRoutes(),"getRoutes")
 // 根据后端数据生成路由
 function filterAsyncRouter(asyncRouter) {
   return asyncRouter.reduce((prev, cur) => {

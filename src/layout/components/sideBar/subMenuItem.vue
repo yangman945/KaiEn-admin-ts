@@ -1,12 +1,13 @@
 <template>
   <!-- 菜单模块 start -->
-  <div v-if="routeMenu.meta.title" class="menu-item">
+  <!-- 模块名称 -->
+  <!-- <div v-if="routeMenu.meta.title" class="menu-item">
     <div class="menu-content pt-8 pb-2">
       <span class="menu-section text-muted text-uppercase fs-8 ls-1">
         {{ routeMenu.meta.title }}
       </span>
     </div>
-  </div>
+  </div> -->
   <div
     v-if="routeMenu.children?.length > 0"
     :class="{ show: hasActiveChildren(routeMenu.path) }"
@@ -30,7 +31,7 @@
       <!-- 菜单内容 -->
       <template v-for="(child, index) in routeMenu.children" :key="index">
         <div v-if="child.meta?.title" class="menu-item">
-          <router-link class="menu-link" active-class="active"  :to="child.path">
+          <router-link class="menu-link" active-class="active" @click="push(child.path)"  :to="child.path">
             <span class="menu-bullet">
               <span class="bullet bullet-dot"></span>
             </span>
@@ -41,7 +42,7 @@
     </div>
   </div>
   <div v-else class="menu-item">
-    <router-link class="menu-link" active-class="active"  :to="routeMenu.path">
+    <router-link class="menu-link" active-class="active" @click="push(routeMenu.path)"  :to="routeMenu.path">
       <span class="menu-icon">
         <span class="svg-icon svg-icon-2">
           <svg-icon icon="verify" />
@@ -56,6 +57,7 @@ import { defineProps, PropType } from "vue";
 import { useRouter,useRoute,RouteRecordRaw } from "vue-router";
 const router = useRouter();
 const route = useRoute();
+console.log(router.getRoutes(),"getRoutes")
 defineProps({
   routeMenu: {
     type: Object as PropType<RouteRecordRaw>,
