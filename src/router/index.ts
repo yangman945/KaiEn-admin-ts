@@ -1,37 +1,35 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw,RouteLocationNormalized } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteRecordRaw,
+} from "vue-router";
 import Layout from "@/layout/index.vue";
-import Custom from "@/views/custom/index.vue";
-import constantRoutes from './constantRoutes'
+import permissionRoutes from './permissionRoutes/index'
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
-    component: import("@/views/login/index.vue"),
+    name: "Login",
+    component: () =>
+      import(/* webpackChunkName: "Login" */ "@/views/login/index.vue"),
   },
   {
     path: "/",
     component: Layout,
-    redirect: "/dashboard",
     name: "Dashboard",
     meta: {
       title: "dashboard",
     },
-    children: [{
-      path: "/dashboard",
-      name:'Dashboards',
-      component: () =>
-        import(
-          /* webpackChunkName: "dashboard" */ "@/views/dashboard/index.vue"
-        ),
-      meta: {
-        title: "dashboard",
-        icon: "dashboard",
-      },
-    },],
+    children: [
+      ...permissionRoutes
+    ],
   },
   {
     path: "/:pathMatch(.*)*",
     redirect: "/404",
-  }
+    name: "Error404",
+    component: () =>
+      import(/* webpackChunkName: "Error404" */ "@/views/errorPage/404.vue"),
+  },
 ];
 const router = createRouter({
   // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。

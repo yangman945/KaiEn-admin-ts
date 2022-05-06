@@ -57,7 +57,6 @@ import { defineProps, PropType } from "vue";
 import { useRouter,useRoute,RouteRecordRaw } from "vue-router";
 const router = useRouter();
 const route = useRoute();
-console.log(router.getRoutes(),"getRoutes")
 defineProps({
   routeMenu: {
     type: Object as PropType<RouteRecordRaw>,

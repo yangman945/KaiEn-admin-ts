@@ -1,9 +1,13 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import type { RequestConfig, RequestInterceptors, CancelRequestSource } from "./types";
-import { getToken } from '@/utils/cookies'
+import type {
+  RequestConfig,
+  RequestInterceptors,
+  CancelRequestSource,
+} from "./types";
+import { getToken } from "@/utils/cookies";
 import whiteList from "../config/default/httpWhiteList";
-const token = getToken() as string
+const token = getToken() as string;
 class Request {
   // axios 实例
   instance: AxiosInstance;
@@ -24,16 +28,16 @@ class Request {
   requestUrlList?: string[];
   constructor(config: RequestConfig) {
     this.instance = axios.create(config);
-    
+
     this.interceptorsObj = config.interceptors;
     this.requestUrlList = [];
     this.cancelRequestSourceList = [];
     //   添加请求拦截器
     this.instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        if(!whiteList.includes(config.url as string) && token){
-          console.log(token,"token")
-          config.headers!.token = token
+        if (!whiteList.includes(config.url as string) && token) {
+          console.log(token, "token");
+          config.headers!.token = token;
         }
         console.log(config, "全局请求拦截器");
         return config;
@@ -53,7 +57,12 @@ class Request {
     this.instance.interceptors.response.use(
       (res: AxiosResponse) => {
         console.log(res, "全局响应拦截器");
-        return res.data;
+
+        if (res.data.response_code === "0") {
+          return res.data;
+        } else {
+          return res.data;
+        }
       },
       (err: any) => err
     );
@@ -87,9 +96,10 @@ class Request {
         })
         .catch((err: any) => {
           reject(err);
-        }).finally( ()=>{
-          url && this.delUrl(url)
         })
+        .finally(() => {
+          url && this.delUrl(url);
+        });
     });
   }
   // 取消全部请求
