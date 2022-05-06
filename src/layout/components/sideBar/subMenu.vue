@@ -45,7 +45,6 @@ import subMenuItem from './subMenuItem.vue'
     const asyncRoutes = computed(()=>{
       return store.state.system.asyacRoutes
     })
-    console.log(asyncRoutes.value,"有东西吗")
     const hasActiveChildren = (match) => {
       return route.path.indexOf(match) !== -1;
     }

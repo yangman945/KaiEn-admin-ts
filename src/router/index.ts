@@ -13,15 +13,21 @@ export const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "Login" */ "@/views/login/index.vue"),
   },
   {
+    path: "/signIn",
+    name: "SignIn",
+    component: () =>
+      import(/* webpackChunkName: "SignIn" */ "@/views/login/signIn.vue"),
+  },
+  {
     path: "/",
     component: Layout,
     name: "Dashboard",
     meta: {
       title: "dashboard",
     },
-    children: [
-      ...permissionRoutes
-    ],
+    // children: [
+      // ...permissionRoutes
+    // ],
   },
   {
     path: "/:pathMatch(.*)*",

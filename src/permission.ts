@@ -7,8 +7,43 @@ import permissionRoutes from "@/router/permissionRoutes";
 import Custom from "@/views/custom/index.vue";
 const token = store.state.user.token;
 const menuList = store.state.system.menuList.flat();
-let asyncRoutes = store.state.system.asyacRoutes;
-console.log(asyncRoutes, "asyncRoutes");
+router.beforeEach(
+  async (to: RouteLocationNormalized, from: RouteLocationNormalized, next: any) => {
+    if (whiteList.includes(to.path as string)) {
+      next();
+      console.log('next()')
+    } else {
+      const hasAsyncRoutes =
+        store.state.system.asyacRoutes &&
+        store.state.system.asyacRoutes.length > 0;
+      console.log(hasAsyncRoutes,"hasAsyncRoutes")
+      if (hasAsyncRoutes) {
+        next();
+        console.log('hasAsyncRoutes')
+      } else if (token) {
+        try {
+          // const accessRoutes = await [
+          //   ...permissionRoutes,
+          //   ...filterAsyncRouter(menuList),
+          // ] as Array<RouteRecordRaw>;
+          const accessRoutes = await filterAsyncRouter(menuList) as  Array<RouteRecordRaw>
+           accessRoutes.forEach((item: RouteRecordRaw): void => {
+            router.addRoute("Dashboard", item);
+          });
+          store.dispatch(SystemActionTypes.ACTION_SET_ASYNC_ROUTES, accessRoutes);
+          next({ ...to, replace: true });
+          console.log('try')
+        } catch {
+          next(`/login?redirect=${to.path}&type=catch`);
+          console.log('catch')
+        }
+      } else {
+        next(`/login?redirect=${to.path}`);
+        console.log('login')
+      }
+    }
+  }
+);
 // router.beforeEach(
 //   (to: RouteLocationNormalized, from: RouteLocationNormalized, next: any) => {
 //     if (token) {
@@ -38,12 +73,10 @@ console.log(asyncRoutes, "asyncRoutes");
 //       if (whiteList.includes(to.path as string)) {
 //         next();
 //       } else {
-//         next(`/login?redirect=${to.path}`);
 //       }
 //     }
 //   }
 // );
-console.log(router.getRoutes(), "getRoutes");
 // 根据后端数据生成路由
 function filterAsyncRouter(asyncRouter) {
   return asyncRouter.reduce((prev, cur) => {
