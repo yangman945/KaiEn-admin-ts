@@ -15,7 +15,7 @@
           <el-input v-model="fromData.url" />
         </el-form-item>
         <el-form-item label="打开方式">
-          <el-input v-model="fromData.url" />
+          <el-input v-model="fromData.target" />
         </el-form-item>
         <el-form-item label="样式类名">
           <el-input v-model="fromData.css" />
@@ -43,7 +43,7 @@
 // import type { FormInstance, FormRules } from 'element-plus'
 import { ref, reactive, defineProps } from "vue";
 import { MenuSubItem } from "../../types";
-import { AddMenuSubRequest } from "@/api/system";
+import { addMenuSubRequest } from "@/api/system";
 const props = defineProps({
   subId: {
     type: Number,
@@ -78,6 +78,7 @@ const submitForm = async (formEl) => {
   if (!formEl) return;
   await formEl.validate((valid, fields) => {
     if (valid) {
+      console.log({ ...fromData.value, id: props.subId },"{ ...fromData.value, id: props.subId }")
       addMenuSub({ ...fromData.value, id: props.subId });
     } else {
       console.log("error submit!", fields);
@@ -95,7 +96,7 @@ defineExpose({
   handleOpen,
 });
 const addMenuSub = (data) => {
-  AddMenuSubRequest(data)
+  addMenuSubRequest(data)
     .then((res) => {
       console.log(res);
       if (res.response_code === "0") {

@@ -1,5 +1,5 @@
 import { computed } from "vue";
-import store from "@/store/index";
+import store from "@/stores/index";
 
 /**
  * Returns layout config

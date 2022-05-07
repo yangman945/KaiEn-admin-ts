@@ -65,7 +65,7 @@ export function getMenuSubAllRequest(data) {
 }
 
 // 编辑子菜单列表项
-export function EditMenuSubRequest(data) {
+export function editMenuSubRequest(data) {
   return api({
     url: '/sys/menu/sub/edit',
     method: 'post',
@@ -74,7 +74,7 @@ export function EditMenuSubRequest(data) {
 }
 
 // 添加子菜单列表项
-export function AddMenuSubRequest(data) {
+export function addMenuSubRequest(data) {
   return api({
     url: '/sys/menu/sub/add',
     method: 'post',
@@ -83,7 +83,7 @@ export function AddMenuSubRequest(data) {
 }
 
 // 删除子菜单列表项
-export function DeleteMenuSubRequest(data) {
+export function deleteMenuSubRequest(data) {
   return api({
     url: '/sys/menu/sub/del',
     method: 'post',
@@ -92,7 +92,7 @@ export function DeleteMenuSubRequest(data) {
 }
 
 // 排序子菜单列表项
-export function SortMenuSubRequest(data) {
+export function sortMenuSubRequest(data) {
   return api({
     url: '/sys/menu/sub/sort',
     method: 'post',

@@ -26,18 +26,21 @@
     </template>
   </el-dialog>
   <add-menu-sub @update-table="handleOpen" :subId="subId" ref="add_menu_sub" />
+  <edit-menu-sub @update-table="handleOpen" :subId="subId" ref="edit_menu_sub" />
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
 import AddMenuSub from "./AddMenuSub.vue";
-import { getMenuSubAllRequest } from "@/api/system";
+import EditMenuSub from "./EditMenuSub.vue";
+import { getMenuSubAllRequest,deleteMenuSubRequest } from "@/api/system";
 const dialogVisible = ref(false);
 const add_menu_sub = ref()
+const edit_menu_sub = ref()
 const subId = ref(0)
 let tableData = ref<Array<any>>([]);
-const handleOpen = (data) => {
-  subId.value = data.id
-  getMenuSubAll({ id: data });
+const handleOpen = (id) => {
+  subId.value = id
+  getMenuSubAll({ id });
   dialogVisible.value = true;
 };
 const handleClose = () => {
@@ -46,8 +49,18 @@ const handleClose = () => {
 defineExpose({
   handleOpen,
 });
-const handleEdit = (row) => {};
-const handleDelete = (index, row) => {};
+const handleEdit = (row) => {
+  edit_menu_sub.value.handleOpen(row)
+};
+const handleDelete = (index, row) => {
+  deleteMenuSubRequest({ id: row.id })
+    .then((res) => {
+      if (res.response_code === "0") {
+          tableData.value.splice(index,1)
+      }
+    })
+    .catch((err) => {});
+};
 const handleAdd = () => {
   add_menu_sub.value.handleOpen()
 }

@@ -119,26 +119,16 @@ const state = reactive({
       sortable: false,
     },
   ],
-  tableData: [
-    // { id: 13, name: "用户左菜单.Vue", status: 1, order: 0 },
-    // { id: 14, name: "管理员左菜单.Vue", status: 1, order: 0 },
-    // { id: 16, name: "左上角菜单.Vue", status: 1, order: 0 },
-    // { id: 45, name: "右上角菜单.Vue", status: 1, order: 0 },
-    // { id: 55, name: "用户左菜单", status: 1, order: 0 },
-    // { id: 56, name: "管理员左菜单", status: 1, order: 0 },
-    // { id: 57, name: "左上角菜单", status: 1, order: 0 },
-    // { id: 59, name: "右上角菜单", status: 1, order: 0 },
-    // { id: 60, name: "asdweqwe111", status: 1, order: 0 },
-  ] as Array<any>,
+  tableData: [] as Array<any>,
 });
 const getMenuAll = () => {
   getMenuAllRequest(null)
     .then((res) => {
-      console.log(res, "res");
       if (res.response_code === "0") {
         const data = filterTableData(res.data);
-        state.tableData = data;
-        console.log(state.tableData);
+        console.log(data,"data")
+        state.tableData = data
+        // state.tableData = state.tableData.splice(0, state.tableData.length, ...data);
       }
     })
     .catch((err) => {

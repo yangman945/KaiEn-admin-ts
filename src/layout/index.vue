@@ -22,6 +22,7 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { SideBar,HeaderWrapper } from "./components/index";
 import { MenuComponent } from "@/assets/ts/components";
+import HtmlClass from "@/core/services/LayoutService";
 const route = useRoute()
 // 是否激活侧边栏
 const asideEnabled = ref(true);
@@ -29,6 +30,7 @@ const loaderEnabled = ref(true);
 const loaderLogo = ref(true);
 const themeLightLogo = ref("main.logo.light");
 const themeDarkLogo = ref("main.logo.dark");
+HtmlClass.init();
 watch(
   () => route.path,
   () => {

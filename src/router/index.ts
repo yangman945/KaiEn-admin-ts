@@ -1,10 +1,6 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  RouteRecordRaw,
-} from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Layout from "@/layout/index.vue";
-import permissionRoutes from './permissionRoutes/index'
+import permissionRoutes from "./permissionRoutes/index";
 export const routes: Array<RouteRecordRaw> = [
   {
     path: "/login",
@@ -12,12 +8,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "Login" */ "@/views/login/index.vue"),
   },
-  {
-    path: "/signIn",
-    name: "SignIn",
-    component: () =>
-      import(/* webpackChunkName: "SignIn" */ "@/views/login/signIn.vue"),
-  },
+
   {
     path: "/",
     component: Layout,
@@ -25,16 +16,33 @@ export const routes: Array<RouteRecordRaw> = [
     meta: {
       title: "dashboard",
     },
-    // children: [
-      // ...permissionRoutes
-    // ],
+    children: [...permissionRoutes],
+  },
+  {
+    path: "/",
+    component: () =>
+      import(
+        /* webpackChunkName: "SignIn" */ "@/components/KT_components/page-layouts/Auth.vue"
+      ),
+    children: [
+      {
+        path: "/sign-in",
+        name: "sign-in",
+        component: () =>
+          import(/* webpackChunkName: "SignIn" */ "@/views/login/signIn.vue"),
+      },
+    ],
+  },
+  {
+    // the 404 route, when none of the above matches
+    path: "/404",
+    name: "Error404",
+    component: () =>
+      import(/* webpackChunkName: "Error404" */ "@/views/errorPage/404.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
     redirect: "/404",
-    name: "Error404",
-    component: () =>
-      import(/* webpackChunkName: "Error404" */ "@/views/errorPage/404.vue"),
   },
 ];
 const router = createRouter({
