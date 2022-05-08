@@ -2,12 +2,7 @@
   <!--begin::Wrapper-->
   <div class="w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto">
     <!--begin::Form-->
-    <Form
-      class="form w-100"
-      id="kt_login_signin_form"
-      @submit="onSubmitLogin"
-      :validation-schema="login"
-    >
+    <Form class="form w-100" id="kt_login_signin_form" @submit="onSubmitLogin" :validation-schema="login">
       <!--begin::Heading-->
       <div class="text-center mb-10">
         <!--begin::Title-->
@@ -36,20 +31,15 @@
       <!--begin::Input group-->
       <div class="fv-row mb-10">
         <!--begin::Label-->
-        <label class="form-label fs-6 fw-bolder text-dark">Email</label>
+        <label class="form-label fs-6 fw-bolder text-dark">账户</label>
         <!--end::Label-->
 
         <!--begin::Input-->
-        <Field
-          class="form-control form-control-lg form-control-solid"
-          type="text"
-          name="email"
-          autocomplete="off"
-        />
+        <Field class="form-control form-control-lg form-control-solid" type="text" name="username" autocomplete="off" />
         <!--end::Input-->
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
-            <ErrorMessage name="email" />
+            <ErrorMessage name="username" />
           </div>
         </div>
       </div>
@@ -60,7 +50,7 @@
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-2">
           <!--begin::Label-->
-          <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+          <label class="form-label fw-bolder text-dark fs-6 mb-0">密码</label>
           <!--end::Label-->
 
           <!--begin::Link-->
@@ -72,12 +62,8 @@
         <!--end::Wrapper-->
 
         <!--begin::Input-->
-        <Field
-          class="form-control form-control-lg form-control-solid"
-          type="password"
-          name="password"
-          autocomplete="off"
-        />
+        <Field class="form-control form-control-lg form-control-solid" type="password" name="password"
+          autocomplete="off" />
         <!--end::Input-->
         <div class="fv-plugins-message-container">
           <div class="fv-help-block">
@@ -90,12 +76,7 @@
       <!--begin::Actions-->
       <div class="text-center">
         <!--begin::Submit button-->
-        <button
-          type="submit"
-          ref="submitButton"
-          id="kt_sign_in_submit"
-          class="btn btn-lg btn-primary w-100 mb-5"
-        >
+        <button type="submit" ref="submitButton" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
           <span class="indicator-label"> Continue </span>
 
           <span class="indicator-progress">
@@ -105,7 +86,7 @@
         </button>
         <!--end::Submit button-->
 
-      
+
         <!--end::Google link-->
       </div>
       <!--end::Actions-->
@@ -121,8 +102,10 @@ import { ErrorMessage, Field, Form } from "vee-validate";
 import { useRouter } from "vue-router";
 import { Actions } from "@/stores/enums/StoreEnums";
 import { useStore } from "vuex";
+// import store from '@/stores'
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
-
+import * as Yup from "yup";
+import UserModule from "@/stores/modules/userModule";
 export default defineComponent({
   name: "sign-in",
   components: {
@@ -135,11 +118,19 @@ export default defineComponent({
     const store = useStore();
 
     const submitButton = ref<HTMLButtonElement | null>(null);
-
+    const login = Yup.object().shape({
+      username: Yup.string().required().label("Email"),
+      password: Yup.string().min(4).required().label("Password"),
+    });
     //Form submit function
     const onSubmitLogin = async (values) => {
-      // Clear existing errors
-      store.dispatch(Actions.LOGOUT);
+      const data = {
+        username: 'tester',
+        password: 'MTIzNzg5',
+        method: 'ps',
+        token_type: 'user',
+        timestamp: Math.round(new Date().getTime() / 1000).toString(),
+      }
 
       if (submitButton.value) {
         // eslint-disable-next-line
@@ -147,43 +138,41 @@ export default defineComponent({
         // Activate indicator
         submitButton.value.setAttribute("data-kt-indicator", "on");
       }
-
-      // Send login request
-      await store.dispatch(Actions.LOGIN, values);
-      const [errorName] = Object.keys(store.getters.getErrors);
-      const error = store.getters.getErrors[errorName];
-
-      if (!error) {
-        Swal.fire({
-          text: "You have successfully logged in!",
-          icon: "success",
-          buttonsStyling: false,
-          confirmButtonText: "Ok, got it!",
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-primary",
-          },
-        }).then(function () {
-          // Go to page after successfully login
-          router.push({ name: "dashboard" });
-        });
-      } else {
-        Swal.fire({
-          text: error[0],
-          icon: "error",
-          buttonsStyling: false,
-          confirmButtonText: "Try again!",
-          customClass: {
-            confirmButton: "btn fw-bold btn-light-danger",
-          },
-        });
-      }
+      let token
+      await store.dispatch(Actions.LOGIN, data).then(data => {
+         token =  data
+      })
+      console.log(token, "token???")
+        if (!!token) {
+          Swal.fire({
+            text: "You have successfully logged in!",
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-primary",
+            },
+          }).then(function () {
+            // Go to page after successfully login
+            router.push({ path: "/" });
+          });
+        } else {
+          Swal.fire({
+            text: '账户有误',
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Try again!",
+            customClass: {
+              confirmButton: "btn fw-bold btn-light-danger",
+            },
+          });
+        }
 
       //Deactivate indicator
       submitButton.value?.removeAttribute("data-kt-indicator");
       // eslint-disable-next-line
       submitButton.value!.disabled = false;
     };
-    const login = () => {};
     return {
       onSubmitLogin,
       submitButton,

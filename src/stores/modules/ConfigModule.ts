@@ -1,7 +1,7 @@
 import objectPath from "object-path";
 import merge from "deepmerge";
 import layoutConfig from "@/core/config/DefaultLayoutConfig";
-import { Mutations } from "@/store/enums/StoreEnums";
+import { Mutations } from "@/stores/enums/StoreEnums";
 import { Mutation, Module, VuexModule } from "vuex-module-decorators";
 import LayoutConfigTypes from "@/core/config/LayoutConfigTypes";
 

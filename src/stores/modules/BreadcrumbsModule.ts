@@ -1,5 +1,5 @@
 import { Action, Mutation, Module, VuexModule } from "vuex-module-decorators";
-import { Actions, Mutations } from "@/store/enums/StoreEnums";
+import { Actions, Mutations } from "@/stores/enums/StoreEnums";
 
 interface Breadcrumb {
   title: string;

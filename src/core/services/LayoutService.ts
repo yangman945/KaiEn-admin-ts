@@ -1,5 +1,5 @@
 import objectPath from "object-path";
-import { Actions } from "@/store/enums/StoreEnums";
+import { Actions } from "@/stores/enums/StoreEnums";
 import store from "@/stores/";
 import { config } from "@/core/helpers/config";
 
